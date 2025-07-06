@@ -175,39 +175,6 @@ async function apiRequest(endpoint, options = {}) {
 - `POST /api/appointments/` - Criar agendamento
 - `DELETE /api/appointments/{id}` - Deletar agendamento
 
-## Recursos Implementados Conforme Requisitos
-
-### Frontend
-- ✅ **SPA desenvolvida** utilizando HTML, CSS e JavaScript
-- ✅ **Criatividade e Interatividade** - Interface moderna com animações
-- ✅ **Elementos em lista ou cards** - Usuários e agendamentos em cards
-- ✅ **Chamada a todas as rotas** implementadas pela API
-
-### Observações Atendidas
-1. ✅ **Não utiliza frameworks** JavaScript baseados em SPA
-2. ✅ **Permitido uso de frameworks de estilo** (Font Awesome para ícones)
-3. ✅ **Frontend executável** diretamente no navegador
-
-## Funcionalidades Extras Implementadas
-
-### Além dos Requisitos Básicos
-- Dashboard com estatísticas em tempo real
-- Sistema de notificações toast
-- Loading states durante requisições
-- Validação de formulários no frontend
-- Design responsivo completo
-- Animações e micro-interações
-- Status visual dos agendamentos
-- Formatação de datas em português
-
-### Melhorias de UX/UI
-- Feedback visual imediato
-- Confirmação antes de deletar
-- Formulários que se escondem após submissão
-- Navegação intuitiva por abas
-- Ícones contextuais
-- Cores e tipografia profissionais
-
 ## Compatibilidade
 
 ### Navegadores Suportados
