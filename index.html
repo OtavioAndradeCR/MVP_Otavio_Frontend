@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Agendamento e Gestão</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-calendar-alt"></i> Sistema de Agendamento</h1>
+                <nav class="nav">
+                    <button class="nav-btn active" data-section="dashboard">
+                        <i class="fas fa-home"></i> Dashboard
+                    </button>
+                    <button class="nav-btn" data-section="users">
+                        <i class="fas fa-users"></i> Usuários
+                    </button>
+                    <button class="nav-btn" data-section="appointments">
+                        <i class="fas fa-calendar-check"></i> Agendamentos
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <p>Visão geral do sistema</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-users">0</h3>
+                            <p>Usuários Cadastrados</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-appointments">0</h3>
+                            <p>Agendamentos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pending-appointments">0</h3>
+                            <p>Pendentes</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="section">
+                <div class="section-header">
+                    <h2>Gerenciar Usuários</h2>
+                    <button id="addUserBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Novo Usuário
+                    </button>
+                </div>
+                
+                <!-- User Form -->
+                <div id="user-form" class="form-container" style="display: none;">
+                    <form id="userForm" class="form">
+                        <h3 id="userFormTitle">Cadastrar Usuário</h3>
+                        <div class="form-group">
+                            <label for="username">Nome de Usuário</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" id="password" name="password" required>
+                            <small id="password-hint" style="display: none;">Deixe em branco para não alterar a senha ao editar.</small>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="userFormSubmitBtn">Salvar</button>
+                            <button type="button" class="btn btn-secondary" id="cancelUserBtn">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Users List -->
+                <div class="data-container">
+                    <div id="users-list" class="data-list"></div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments" class="section">
+                <div class="section-header">
+                    <h2>Gerenciar Agendamentos</h2>
+                    <button id="addAppointmentBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Novo Agendamento
+                    </button>
+                </div>
+                
+                <!-- Appointment Form -->
+                <div id="appointment-form" class="form-container" style="display: none;">
+                    <form id="appointmentForm" class="form">
+                        <h3 id="appointmentFormTitle">Criar Agendamento</h3>
+                        <div class="form-group">
+                            <label for="appointment-user">Usuário</label>
+                            <select id="appointment-user" name="user_id" required>
+                                <option value="">Selecione um usuário</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-title">Título</label>
+                            <input type="text" id="appointment-title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-description">Descrição</label>
+                            <textarea id="appointment-description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-date-time">Data e Hora</label>
+                            <input type="datetime-local" id="appointment-date-time" name="date_time" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="appointmentFormSubmitBtn">Salvar</button>
+                            <button type="button" class="btn btn-secondary" id="cancelAppointmentBtn">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Appointments List -->
+                <div class="data-container">
+                    <div id="appointments-list" class="data-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
